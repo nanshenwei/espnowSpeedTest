@@ -1,0 +1,21 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.adapterTargetName": "esp32s2",
+    "idf.customExtraPaths": "/Users/lub/.espressif/tools/xtensa-esp-elf-gdb/12.1_20221002/xtensa-esp-elf-gdb/bin:/Users/lub/.espressif/tools/riscv32-esp-elf-gdb/12.1_20221002/riscv32-esp-elf-gdb/bin:/Users/lub/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/bin:/Users/lub/.espressif/tools/xtensa-esp32s2-elf/esp-12.2.0_20230208/xtensa-esp32s2-elf/bin:/Users/lub/.espressif/tools/xtensa-esp32s3-elf/esp-12.2.0_20230208/xtensa-esp32s3-elf/bin:/Users/lub/.espressif/tools/riscv32-esp-elf/esp-12.2.0_20230208/riscv32-esp-elf/bin:/Users/lub/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin:/Users/lub/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230419/openocd-esp32/bin:/Users/lub/.espressif/tools/esp-rom-elfs/20230320",
+    "idf.customExtraVars": {
+        "OPENOCD_SCRIPTS": "/Users/lub/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230419/openocd-esp32/share/openocd/scripts",
+        "ESP_ROM_ELF_DIR": "/Users/lub/.espressif/tools/esp-rom-elfs/20230320/"
+    },
+    "idf.espIdfPath": "/Users/lub/esp/esp-idf",
+    "idf.openOcdConfigs": [
+        "interface/ftdi/esp32_devkitj_v1.cfg",
+        "target/esp32s2.cfg"
+    ],
+    "idf.port": "/dev/cu.wchusbserial120",
+    "idf.pythonBinPath": "/Users/lub/.espressif/python_env/idf5.1_py3.12_env/bin/python",
+    "idf.toolsPath": "/Users/lub/.espressif",
+    "idf.flashType": "UART",
+    "files.associations": {
+        "gpio.h": "c"
+    }
+}
