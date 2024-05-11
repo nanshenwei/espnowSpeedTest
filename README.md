@@ -5,9 +5,10 @@
 1. **Set target**. (My project is on ESP32-S2)
 2. In **menuconfig**, set the CPU frequency to **maximum**.
 3. In **menuconfig**, FreeRTOS -> configTICK_RATE_HZ -> 1000 (**optional**).
+   1. This is also optional because in the send callback function it calls: `if(xHigherPriorityTaskWoken == pdTRUE) taskYIELD();` and the sending task's priority is `configMAX_PRIORITIES`.
 4. In **menuconfig**, turn **off** both WiFi AMPDU TX and AMPDU RX.
-5. In **menuconfig**, **transmitting** side: WiFi Max number of WiFi dynamic **TX** buffers -> 48 (**optional**).
-6. In **menuconfig**, **receiving** side: WiFi Max number of WiFi dynamic **RX** buffers -> 48 (**optional**).
+5. ~~In **menuconfig**, **transmitting** side: WiFi Max number of WiFi dynamic **TX** buffers -> 48 (**optional**).~~
+6. ~~In **menuconfig**, **receiving** side: WiFi Max number of WiFi dynamic **RX** buffers -> 48 (**optional**).~~
 7. Points to note in the code:
    1. After initializing WiFi, execute `esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_PHY_RATE_MCS7_SGI);` to set the ESPNOW RF rate to the highest.
    2. `#define WIFI_CHANNEL 2` Choose a channel with less interference. You can use software to view the surrounding wireless environment (the simplest method is to scan for SSIDs to find an unused channel). Through testing, mine is channel 2. You can also try several channels; my tests show that **the choice of channel greatly affects the rate**.
