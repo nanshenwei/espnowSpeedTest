@@ -2,14 +2,14 @@
 
 ## My Configuration and Precautions
 
-1. **Set target**. (My project is on ESP32-S2)
+1. **Set target**. (ESP32-S2 for me)
 2. In **menuconfig**, set the CPU frequency to **maximum**.
 3. In **menuconfig**, FreeRTOS -> configTICK_RATE_HZ -> 1000 (**optional**).
    1. This is also optional because in the send callback function it calls: `if(xHigherPriorityTaskWoken == pdTRUE) taskYIELD();` and the sending task's priority is `configMAX_PRIORITIES`.
 4. In **menuconfig**, turn **off** both WiFi AMPDU TX and AMPDU RX.
 5. ~~In **menuconfig**, **transmitting** side: WiFi Max number of WiFi dynamic **TX** buffers -> 48 (**optional**).~~
 6. ~~In **menuconfig**, **receiving** side: WiFi Max number of WiFi dynamic **RX** buffers -> 48 (**optional**).~~
-7. ❗️❗️❗️(Update) The test was conducted in an office environment at a distance of half a meter. For harsh electromagnetic environments and slightly longer transmission distances, **reducing the wireless transmission rate can significantly improve the transmission success rate (frame rate)**, for example: `esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_PHY_RATE_MCS7_LGI); -> esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_PHY_RATE_MCS1_LGI);`
+7. ❗️❗️❗️(Update) The test was conducted in an office environment at a distance of half a meter. For harsh electromagnetic environments and slightly longer transmission distances, **reducing the wireless transmission rate can significantly improve the transmission success rate (frame rate)**(Choosing a lower transmission rate will use a simpler modulation, which will result in a higher signal-to-noise ratio.), for example: `esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_PHY_RATE_MCS7_LGI); -> esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_PHY_RATE_MCS1_LGI);`
    1. Tests have shown that high transmission rates can trigger the ESPNOW send callback function at a very high speed, achieving a high **"send rate"**, but packet capture reveals that the vast majority of received packets are erroneous packets that fail the CRC check (and thus do not trigger the ESPNOW receive callback function), significantly reducing the transmission success rate (frame rate).
    2. Frame rate calculations are performed at the receiving end's ESPNOW receive callback function. Since ESPNOW complies with the 802.11 standards, packets that trigger the ESPNOW receive callback function are **highly likely** to be correct (of course, in scenarios where accuracy is crucial, combining reliable data verification methods and robust retransmission mechanisms is necessary), so I believe this frame rate can relatively accurately reflect the rate of successfully transmitted packets.
 8. ❗️❗️❗️Points to note in the code:
